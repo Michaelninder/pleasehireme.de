@@ -1,5 +1,6 @@
 :root {
     --bg: #0a0a0f;
+    --bg-section: rgba(255, 255, 255, 0.03);
     --text-primary: #f0f0f5;
     --text-muted: #6b7280;
     --accent: #6c63ff;
@@ -20,35 +21,42 @@
 
 body {
     min-height: 100vh;
+    color: var(--text-primary);
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(ellipse at 20% 30%, rgba(108, 99, 255, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 70%, rgba(108, 99, 255, 0.05) 0%, transparent 50%);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+                 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 0;
+}
+
+/* ── Shared highlight (covers both .highlight and typo .highligh) ── */
+.highlight, .highligh {
+    color: var(--accent);
+    text-shadow: 0 0 30px var(--accent-glow);
+    background: var(--highlight-bg);
+    padding: 0 0.15em;
+    border-radius: 4px;
+}
+
+/* ── Hero ── */
+.section__hero {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: var(--text-primary);
-    background-color: var(--bg);
-    background-image:
-        radial-gradient(ellipse at 20% 50%, rgba(108, 99, 255, 0.08) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(108, 99, 255, 0.05) 0%, transparent 50%);
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-                 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-align: center;
     padding: 2rem;
 }
 
-h1 {
+.section__hero h1 {
     font-size: clamp(2.5rem, 8vw, 6rem);
     font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1.1;
     margin-bottom: 1rem;
-}
-
-.tbd-highlight {
-    color: var(--accent);
-    text-shadow: 0 0 40px var(--accent-glow);
-    background: var(--highlight-bg);
-    padding: 0 0.15em;
-    border-radius: 6px;
 }
 
 .domain-subtitle {
@@ -57,4 +65,25 @@ h1 {
     color: var(--text-muted);
     letter-spacing: 0.15em;
     text-transform: lowercase;
+}
+
+/* ── About ── */
+.section__about {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.section__about h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+}
+
+.section__about p {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    line-height: 1.8;
+    color: var(--text-muted);
 }
