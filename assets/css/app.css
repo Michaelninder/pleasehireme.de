@@ -30,6 +30,25 @@ body {
                  'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+/* ── Global links ── */
+a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: opacity 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+a:hover {
+    opacity: 0.75;
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+}
+
+a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
 /* ── Highlight (covers typo .highligh too) ── */
 .highlight, .highligh {
     color: var(--accent);
@@ -239,4 +258,88 @@ body {
 .email-canvas {
     display: block;
     image-rendering: crisp-edges;
+}
+
+/* ── Projects ── */
+.section__projects {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.section__projects h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+}
+
+.projects-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.project-card {
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    border: 1px solid rgba(108, 99, 255, 0.2);
+    background: var(--highlight-bg);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.project-card__header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.project-card__name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+}
+
+.project-card__desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.project-card__links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.25rem;
+}
+
+.project-card__links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.25em 0.7em;
+    border-radius: 4px;
+    border: 1px solid rgba(108, 99, 255, 0.35);
+    color: var(--accent);
+    text-decoration: none;
+    transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+.project-card__links a:hover {
+    background: rgba(108, 99, 255, 0.15);
+    opacity: 1;
+    text-decoration: none;
+}
+
+.project-card--more {
+    background: transparent;
+    border-color: transparent;
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 0.9rem;
+    padding-left: 0.25rem;
 }
