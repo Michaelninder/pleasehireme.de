@@ -82,6 +82,16 @@ body {
     color: var(--text-primary);
 }
 
+/* ── Section shared ── */
+.section-indicator {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    opacity: 0.6;
+    margin-bottom: 1rem;
+}
+
 /* ── Hero ── */
 .section__hero {
     min-height: 100vh;
@@ -128,4 +138,43 @@ body {
     font-size: clamp(1rem, 2vw, 1.15rem);
     line-height: 1.8;
     color: var(--text-muted);
+}
+
+/* ── Stack ── */
+.section__stack {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.section__stack h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+}
+
+.section__stack ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.section__stack li {
+    font-size: 0.9rem;
+    padding: 0.4em 0.9em;
+    border-radius: 6px;
+    background: var(--highlight-bg);
+    color: var(--accent);
+    border: 1px solid rgba(108, 99, 255, 0.2);
+    letter-spacing: 0.03em;
+}
+
+.section__stack li.note {
+    background: transparent;
+    border-color: transparent;
+    color: var(--text-muted);
+    font-style: italic;
 }
