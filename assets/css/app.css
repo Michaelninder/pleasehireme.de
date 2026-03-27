@@ -290,6 +290,17 @@ a:focus-visible {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    overflow: hidden;
+}
+
+.project-card__img {
+    width: calc(100% + 3rem);
+    margin: -1.25rem -1.5rem 0.75rem;
+    height: 180px;
+    object-fit: cover;
+    object-position: top;
+    border-bottom: 1px solid rgba(108, 99, 255, 0.15);
+    display: block;
 }
 
 .project-card__header {
