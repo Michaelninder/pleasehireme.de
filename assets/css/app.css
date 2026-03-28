@@ -6,6 +6,8 @@
     --accent-glow: rgba(108, 99, 255, 0.3);
     --highlight-bg: rgba(108, 99, 255, 0.15);
     --nav-height: 64px;
+    --radius: 12px;
+    --squircle: squircle(corner-radius 12px);
 }
 
 *, *::before, *::after {
@@ -43,7 +45,6 @@ body {
     background: rgba(108, 99, 255, 0.4);
     border-radius: 99px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(108, 99, 255, 0.7);
 }
@@ -75,7 +76,8 @@ body {
 .lightbox__img {
     max-width: 90vw;
     max-height: 85vh;
-    border-radius: 10px;
+    border-radius: var(--radius);
+    corner-shape: var(--squircle);
     box-shadow: 0 24px 80px rgba(0, 0, 0, 0.7);
     object-fit: contain;
 }
@@ -129,7 +131,8 @@ a:hover {
 a:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
-    border-radius: 2px;
+    border-radius: var(--radius);
+    corner-shape: var(--squircle);
 }
 
 /* ── Highlight (covers typo .highligh too) ── */
@@ -139,6 +142,7 @@ a:focus-visible {
     background: var(--highlight-bg);
     padding: 0 0.15em;
     border-radius: 4px;
+    corner-shape: var(--squircle);
 }
 
 /* ── Navbar ── */
@@ -267,7 +271,8 @@ a:focus-visible {
 .section__stack li {
     font-size: 0.9rem;
     padding: 0.4em 0.9em;
-    border-radius: 6px;
+    border-radius: var(--radius);
+    corner-shape: var(--squircle);
     background: var(--highlight-bg);
     color: var(--accent);
     border: 1px solid rgba(108, 99, 255, 0.2);
@@ -367,7 +372,8 @@ a:focus-visible {
 
 .project-card {
     padding: 1.25rem 1.5rem;
-    border-radius: 10px;
+    border-radius: var(--radius);
+    corner-shape: var(--squircle);
     border: 1px solid rgba(108, 99, 255, 0.2);
     background: var(--highlight-bg);
     display: flex;
@@ -416,7 +422,8 @@ a:focus-visible {
     letter-spacing: 0.06em;
     text-transform: uppercase;
     padding: 0.25em 0.7em;
-    border-radius: 4px;
+    border-radius: var(--radius);
+    corner-shape: var(--squircle);
     border: 1px solid rgba(108, 99, 255, 0.35);
     color: var(--accent);
     text-decoration: none;
@@ -485,7 +492,8 @@ a:focus-visible {
     letter-spacing: 0.06em;
     text-transform: uppercase;
     padding: 0.2em 0.65em;
-    border-radius: 4px;
+    border-radius: var(--radius);
+    corner-shape: var(--squircle);
     font-weight: 600;
 }
 
@@ -495,22 +503,13 @@ a:focus-visible {
 .level--beginner     { background: rgba(239, 68, 68, 0.12); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
 
 
-footer {
-    background-color: var(--to-be-done);
-    color: var(--to-be-done);
-    margin: 3rem;
-}
-
-footer a {
-    color: var(--to-be-done);
-}
-
 /* ── Footer ── */
 .footer {
     max-width: 720px;
     margin: 3rem auto 2rem;
     padding: 0.9rem 1.5rem;
-    border-radius: 12px;
+    border-radius: var(--radius);
+    corner-shape: var(--squircle);
     background: rgba(18, 18, 26, 0.75);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
@@ -566,7 +565,8 @@ footer a {
     letter-spacing: 0.06em;
     text-transform: uppercase;
     padding: 0.3em 0.8em;
-    border-radius: 4px;
+    border-radius: var(--radius);
+    corner-shape: var(--squircle);
     cursor: pointer;
     transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
@@ -609,13 +609,28 @@ footer a {
 
 .competition__item {
     padding: 1.25rem 1.5rem;
-    border-radius: 10px;
+    border-radius: var(--radius);
+    corner-shape: var(--squircle);
     border: 1px solid rgba(108, 99, 255, 0.2);
     background: var(--highlight-bg);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+        "meta    img"
+        "title   img"
+        "level   img"
+        "stages  img"
+        "awards  img";
+    column-gap: 1.25rem;
+    row-gap: 0.5rem;
+    align-items: start;
 }
+
+.competition__meta   { grid-area: meta; }
+.competition__item > h3 { grid-area: title; }
+.competition__item > .competition__level { grid-area: level; }
+.competition__stages { grid-area: stages; }
+.competition__item > .competition__awards { grid-area: awards; }
 
 .competition__meta {
     display: flex;
@@ -661,7 +676,8 @@ footer a {
 .competition__awards li {
     font-size: 0.78rem;
     padding: 0.2em 0.7em;
-    border-radius: 4px;
+    border-radius: var(--radius);
+    corner-shape: var(--squircle);
     background: rgba(34, 197, 94, 0.1);
     color: #4ade80;
     border: 1px solid rgba(34, 197, 94, 0.25);
@@ -685,11 +701,31 @@ footer a {
 
 /* ── Competition image ── */
 .competition__img {
-    width: calc(100% + 3rem);
-    margin: 0.25rem -1.5rem;
-    height: auto;
-    object-fit: unset;
-    border-top: 1px solid rgba(108, 99, 255, 0.15);
-    border-bottom: 1px solid rgba(108, 99, 255, 0.15);
-    display: block;
+    grid-area: img;
+    grid-row: 1 / -1;
+    width: 160px;
+    height: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    corner-shape: var(--squircle);
+    border: 1px solid rgba(108, 99, 255, 0.15);
+    align-self: stretch;
+}
+
+@media (max-width: 520px) {
+    .competition__item {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "img"
+            "meta"
+            "title"
+            "level"
+            "stages"
+            "awards";
+    }
+    .competition__img {
+        width: 100%;
+        max-height: 160px;
+    }
 }
