@@ -58,7 +58,9 @@
     document.querySelectorAll('img[data-lightbox]').forEach(function (img) {
         img.style.cursor = 'zoom-in';
         img.addEventListener('click', function () {
-            open(img.src, img.alt, img.dataset.title);
+            // Use data-fullsrc for full resolution in lightbox if available
+            var fullSrc = img.dataset.fullsrc || img.src;
+            open(fullSrc, img.alt, img.dataset.title);
         });
     });
 

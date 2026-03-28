@@ -25,9 +25,6 @@ body {
     min-height: 100vh;
     color: var(--text-primary);
     background-color: var(--bg);
-    background-image:
-        radial-gradient(ellipse at 20% 30%, rgba(108, 99, 255, 0.08) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 70%, rgba(108, 99, 255, 0.05) 0%, transparent 50%);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
                  'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
@@ -724,8 +721,83 @@ a:focus-visible {
             "stages"
             "awards";
     }
-    .competition__img {
+    .competition__img--desktop { display: none; }
+    .competition__img--mobile  { display: block; }
+}
+
+@media (min-width: 521px) {
+    .competition__img--mobile  { display: none; }
+    .competition__img--desktop { display: block; }
+}
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+
+    /* Nav: shrink gaps and font so links don't overflow */
+    .navbar {
+        padding: 0 1rem;
+    }
+    .nav-links__list {
+        gap: 1rem;
+    }
+    .nav-link__link {
+        font-size: 0.75rem;
+        letter-spacing: 0.04em;
+    }
+
+    /* Sections: reduce vertical padding */
+    .section__about,
+    .section__stack,
+    .section__projects,
+    .section__skills,
+    .section__wettbewerbe,
+    .section__availability,
+    .section__contact {
+        padding: 3rem 1.25rem;
+    }
+
+    /* Footer */
+    .footer {
+        margin: 2rem 1rem 1rem;
+        padding: 0.75rem 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    /* Skills table: hide category column on small screens */
+    .skills-table th:nth-child(2),
+    .skills-table td:nth-child(2) {
+        display: none;
+    }
+    .skills-table th,
+    .skills-table td {
+        padding: 0.6rem 0.5rem;
+    }
+
+    /* Contact: allow wrapping */
+    .contact-list li {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    .contact-label {
+        min-width: unset;
         width: 100%;
-        max-height: 160px;
+    }
+
+    /* Competition image on mobile: full width, natural ratio, no grid bleed */
+    .competition__img--mobile {
+        grid-area: img;
+        width: 100%;
+        height: auto;
+        max-height: none;
+        object-fit: cover;
+        border-radius: var(--radius);
+        border: 1px solid rgba(108, 99, 255, 0.15);
+    }
+
+    /* Project card image: reduce height on small screens */
+    .project-card__img {
+        height: 130px;
     }
 }
