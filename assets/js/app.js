@@ -38,9 +38,21 @@
     var lightImg = document.getElementById('lightbox-img');
     var caption  = document.getElementById('lightbox-caption');
     var closeBtn = document.getElementById('lightbox-close');
+    var cache    = {};  // src → Image (preloaded)
+
+    function preload(src) {
+        if (cache[src]) return;
+        var img = new Image();
+        img.src = src;
+        cache[src] = img;
+    }
 
     function open(src, alt, title) {
-        lightImg.src = src;
+        // Only change src if different — avoids reload flicker
+        if (lightImg.dataset.loaded !== src) {
+            lightImg.src = src;
+            lightImg.dataset.loaded = src;
+        }
         lightImg.alt = alt || '';
         caption.textContent = title || '';
         caption.style.display = title ? 'block' : 'none';
@@ -51,27 +63,25 @@
     function close() {
         lightbox.classList.remove('is-open');
         document.body.style.overflow = '';
-        lightImg.src = '';
+        // Don't clear src — keep it cached in the element
     }
 
-    // Any img with data-lightbox attribute triggers the gallery
     document.querySelectorAll('img[data-lightbox]').forEach(function (img) {
         img.style.cursor = 'zoom-in';
+        var fullSrc = img.dataset.fullsrc || img.src;
+
+        // Preload on hover
+        img.addEventListener('mouseenter', function () { preload(fullSrc); });
+
         img.addEventListener('click', function () {
-            // Use data-fullsrc for full resolution in lightbox if available
-            var fullSrc = img.dataset.fullsrc || img.src;
             open(fullSrc, img.alt, img.dataset.title);
         });
     });
 
     closeBtn.addEventListener('click', close);
-
-    // Click backdrop to close
     lightbox.addEventListener('click', function (e) {
         if (e.target === lightbox) close();
     });
-
-    // Escape key to close
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') close();
     });
@@ -218,4 +228,62 @@
     }, { rootMargin: '200px' });
 
     observer.observe(section);
+}());
+
+
+
+
+
+// ── Language switcher ──
+(function () {
+    var btn      = document.getElementById('lang-btn');
+    var switcher = document.getElementById('lang-switcher');
+    var menu     = document.getElementById('lang-menu');
+    var popover  = document.getElementById('lang-popover');
+    var backdrop = document.getElementById('lang-popover-backdrop');
+    if (!btn) return;
+
+    function isMobile() { return window.innerWidth <= 600; }
+
+    function redirect(lang) {
+        var p = new URLSearchParams(window.location.search);
+        p.set('lang', lang);
+        window.location.href = window.location.pathname + '?' + p.toString();
+    }
+
+    // ── Desktop dropdown ──
+    function openDropdown()  { switcher.classList.add('is-open');    btn.setAttribute('aria-expanded','true'); }
+    function closeDropdown() { switcher.classList.remove('is-open'); btn.setAttribute('aria-expanded','false'); }
+
+    if (menu) {
+        menu.querySelectorAll('.lang-switcher__option').forEach(function (opt) {
+            opt.addEventListener('click', function () { redirect(opt.dataset.lang); });
+        });
+    }
+
+    // ── Mobile popover ──
+    function openPopover()  { if (popover) { popover.classList.add('is-open');    popover.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; } }
+    function closePopover() { if (popover) { popover.classList.remove('is-open'); popover.setAttribute('aria-hidden','true');  document.body.style.overflow=''; } }
+
+    if (popover) {
+        popover.querySelectorAll('.lang-popover__option').forEach(function (opt) {
+            opt.addEventListener('click', function () { redirect(opt.dataset.lang); });
+        });
+        if (backdrop) backdrop.addEventListener('click', closePopover);
+    }
+
+    // ── Trigger ──
+    btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (isMobile()) {
+            openPopover();
+        } else {
+            switcher.classList.contains('is-open') ? closeDropdown() : openDropdown();
+        }
+    });
+
+    document.addEventListener('click', closeDropdown);
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { closeDropdown(); closePopover(); }
+    });
 }());

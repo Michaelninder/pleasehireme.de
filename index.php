@@ -4,6 +4,17 @@ require_once __DIR__ . '/bootstrap.php';
 $router  = new Router();
 $request = new Request();
 
+// ── Locale ────────────────────────────────────────────────────────────────────
+if (isset($_GET['lang'])) {
+    $locale = $_GET['lang'];
+    setcookie('lang', $locale, time() + 31536000, '/');
+} elseif (isset($_COOKIE['lang'])) {
+    $locale = $_COOKIE['lang'];
+} else {
+    $locale = Lang::detectLocale();
+}
+Lang::init($locale);
+
 // ── Routes ────────────────────────────────────────────────────────────────────
 
 $router->get('/', function () {
