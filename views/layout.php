@@ -19,6 +19,7 @@ $content = $content ?? '';
         <span></span><span></span><span></span>
     </button>
     <div class="nav-links__container" id="nav-menu">
+        <span class="nav-indicator" id="nav-indicator"></span>
         <ul class="nav-links__list">
             <li class="nav-link__item"><a href="/#about"        class="nav-link__link">About</a></li>
             <li class="nav-link__item"><a href="/#projects"     class="nav-link__link">Projects</a></li>

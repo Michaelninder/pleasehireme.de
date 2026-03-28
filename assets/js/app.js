@@ -77,19 +77,78 @@
     });
 }());
 
-// ── Navbar: scroll state + mobile toggle ──
+// ── Navbar: scroll state + active indicator + mobile toggle ──
 (function () {
-    var navbar  = document.getElementById('navbar');
-    var toggle  = document.getElementById('nav-toggle');
-    var menu    = document.getElementById('nav-menu');
-    var links   = menu ? menu.querySelectorAll('.nav-link__link') : [];
+    var navbar    = document.getElementById('navbar');
+    var toggle    = document.getElementById('nav-toggle');
+    var menu      = document.getElementById('nav-menu');
+    var indicator = document.getElementById('nav-indicator');
+    var linkEls   = document.querySelectorAll('.nav-link__link');
 
+    // ── Scroll state ──
     function onScroll() {
         navbar.classList.toggle('is-scrolled', window.scrollY > 50);
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
+    // ── Sliding pill indicator ──
+    function moveIndicator(el) {
+        if (!indicator || !el) return;
+        var listRect = el.closest('.nav-links__list').getBoundingClientRect();
+        var linkRect = el.getBoundingClientRect();
+        var offsetX  = linkRect.left - listRect.left;
+        indicator.style.width   = linkRect.width + 'px';
+        indicator.style.transform = 'translateY(-50%) translateX(' + offsetX + 'px)';
+        indicator.style.opacity = '1';
+    }
+
+    function hideIndicator() {
+        if (indicator) indicator.style.opacity = '0';
+    }
+
+    // Hover: show pill on hovered link
+    linkEls.forEach(function (link) {
+        link.addEventListener('mouseenter', function () {
+            moveIndicator(link);
+        });
+    });
+
+    // Mouse leaves the whole list: snap back to active or hide
+    var list = document.querySelector('.nav-links__list');
+    if (list) {
+        list.addEventListener('mouseleave', function () {
+            var active = document.querySelector('.nav-link__link.active');
+            active ? moveIndicator(active) : hideIndicator();
+        });
+    }
+
+    // ── Active section via IntersectionObserver ──
+    var sections = document.querySelectorAll('section[id]');
+    var activeId = null;
+
+    function setActive(id) {
+        if (id === activeId) return;
+        activeId = id;
+        linkEls.forEach(function (link) {
+            var href = link.getAttribute('href');
+            var matches = href === '/#' + id || href === '#' + id;
+            link.classList.toggle('active', matches);
+            if (matches) moveIndicator(link);
+        });
+    }
+
+    if (sections.length && 'IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) setActive(entry.target.id);
+            });
+        }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+
+        sections.forEach(function (s) { observer.observe(s); });
+    }
+
+    // ── Mobile toggle ──
     function openMenu() {
         menu.classList.add('is-open');
         toggle.classList.add('is-open');
@@ -104,13 +163,11 @@
         document.body.style.overflow = '';
     }
 
-    function toggleMenu() {
+    if (toggle) toggle.addEventListener('click', function () {
         menu.classList.contains('is-open') ? closeMenu() : openMenu();
-    }
+    });
 
-    if (toggle) toggle.addEventListener('click', toggleMenu);
-
-    links.forEach(function (link) {
+    linkEls.forEach(function (link) {
         link.addEventListener('click', closeMenu);
     });
 
@@ -140,4 +197,25 @@
             });
         });
     });
+}());
+
+// ── Preload lightbox images when wettbewerbe section enters viewport ──
+(function () {
+    var section = document.getElementById('wettbewerbe');
+    if (!section || !('IntersectionObserver' in window)) return;
+
+    var preloaded = false;
+
+    var observer = new IntersectionObserver(function (entries) {
+        if (preloaded || !entries[0].isIntersecting) return;
+        preloaded = true;
+        observer.disconnect();
+
+        section.querySelectorAll('img[data-fullsrc]').forEach(function (img) {
+            var pre = new Image();
+            pre.src = img.dataset.fullsrc;
+        });
+    }, { rootMargin: '200px' });
+
+    observer.observe(section);
 }());
