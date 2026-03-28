@@ -94,6 +94,15 @@
     <section class="section__skills" id="skills">
         <span class="section-indicator">#skills</span>
         <h2>Skills &amp; Proficiency</h2>
+        <div class="skills-filters">
+            <button class="skills-filter is-active" data-filter="all">All</button>
+            <button class="skills-filter" data-filter="Back-End">Back-End</button>
+            <button class="skills-filter" data-filter="Front-End">Front-End</button>
+            <button class="skills-filter" data-filter="Framework">Framework</button>
+            <button class="skills-filter" data-filter="Database">Database</button>
+            <button class="skills-filter" data-filter="Styling">Styling</button>
+            <button class="skills-filter" data-filter="Templating">Templating</button>
+        </div>
         <table class="skills-table">
             <thead>
                 <tr>
@@ -103,17 +112,58 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><td>PHP</td><td>Back-End</td><td><span class="level level--expert">Expert</span></td></tr>
-                <tr><td>Laravel</td><td>Framework</td><td><span class="level level--expert">Expert</span></td></tr>
-                <tr><td>MySQL</td><td>Database</td><td><span class="level level--advanced">Advanced</span></td></tr>
-                <tr><td>SQLite</td><td>Database</td><td><span class="level level--advanced">Advanced</span></td></tr>
-                <tr><td>TailwindCSS</td><td>Styling</td><td><span class="level level--advanced">Advanced</span></td></tr>
-                <tr><td>CSS3</td><td>Styling</td><td><span class="level level--advanced">Advanced</span></td></tr>
-                <tr><td>Python</td><td>Back-End</td><td><span class="level level--intermediate">Intermediate</span></td></tr>
-                <tr><td>JavaScript</td><td>Front-End</td><td><span class="level level--intermediate">Intermediate</span></td></tr>
-                <tr><td>Blade</td><td>Templating</td><td><span class="level level--expert">Expert</span></td></tr>
+                <tr data-category="Back-End"><td>PHP</td><td>Back-End</td><td><span class="level level--expert">Expert</span></td></tr>
+                <tr data-category="Framework"><td>Laravel</td><td>Framework</td><td><span class="level level--expert">Expert</span></td></tr>
+                <tr data-category="Database"><td>MySQL</td><td>Database</td><td><span class="level level--advanced">Advanced</span></td></tr>
+                <tr data-category="Database"><td>SQLite</td><td>Database</td><td><span class="level level--advanced">Advanced</span></td></tr>
+                <tr data-category="Styling"><td>TailwindCSS</td><td>Styling</td><td><span class="level level--advanced">Advanced</span></td></tr>
+                <tr data-category="Styling"><td>CSS3</td><td>Styling</td><td><span class="level level--advanced">Advanced</span></td></tr>
+                <tr data-category="Back-End"><td>Python</td><td>Back-End</td><td><span class="level level--intermediate">Intermediate</span></td></tr>
+                <tr data-category="Front-End"><td>JavaScript</td><td>Front-End</td><td><span class="level level--intermediate">Intermediate</span></td></tr>
+                <tr data-category="Templating"><td>Blade</td><td>Templating</td><td><span class="level level--expert">Expert</span></td></tr>
             </tbody>
         </table>
+    </section>
+
+    <section class="section__wettbewerbe" id="wettbewerbe">
+        <span class="section-indicator">#wettbewerbe</span>
+        <h2>Wettbewerbe</h2>
+        <div class="competition-list">
+            <div class="competition__item">
+                <div class="competition__meta">
+                    <span class="competition__category">Mathematik/Informatik</span>
+                    <span class="competition__date">31.01.2026</span>
+                </div>
+                <h3>Mensa Bewertungssystem</h3>
+                <span class="competition__level">Jugend forscht – Kaiserslautern</span>
+                <ul class="competition__awards">
+                    <li>2. Preis Mathematik/Informatik</li>
+                </ul>
+            </div>
+            <div class="competition__item">
+                <div class="competition__meta">
+                    <span class="competition__category">Arbeitswelt</span>
+                </div>
+                <h3>Optimierung der Organisation und Ermöglichung von freiem Arbeiten in der JuFo-AG</h3>
+                <img class="competition__img" src="assets/img/wettbewerbe/2026-jufo-arbeitswelt.jpg" alt="Jugend forscht – Arbeitswelt Projekt" data-lightbox data-title="Jugend forscht – Arbeitswelt: Optimierung der JuFo-AG">
+                <div class="competition__stages">
+                    <div class="competition__stage">
+                        <span class="competition__level">Jugend forscht – Mainz-Rheinhessen</span>
+                        <span class="competition__date">20.02.2026</span>
+                        <ul class="competition__awards">
+                            <li>Regionalsieg – 1. Preis Arbeitswelt</li>
+                        </ul>
+                    </div>
+                    <div class="competition__stage">
+                        <span class="competition__level">Jugend forscht – Rheinland-Pfalz (Landeswettbewerb)</span>
+                        <span class="competition__date">17.03.2026 – 19.03.2026</span>
+                        <ul class="competition__awards">
+                            <li>3. Preis Arbeitswelt</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section class="section__availability" id="availability">
@@ -155,7 +205,10 @@
     </footer>
     <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
         <button class="lightbox__close" id="lightbox-close" aria-label="Close">&times;</button>
-        <img class="lightbox__img" id="lightbox-img" src="" alt="">
+        <figure class="lightbox__figure">
+            <img class="lightbox__img" id="lightbox-img" src="" alt="">
+            <figcaption class="lightbox__caption" id="lightbox-caption"></figcaption>
+        </figure>
     </div>
 
     <script src="assets/js/app.js"></script>

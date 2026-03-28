@@ -80,6 +80,21 @@ body {
     object-fit: contain;
 }
 
+.lightbox__figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    max-width: 90vw;
+}
+
+.lightbox__caption {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+    letter-spacing: 0.03em;
+}
+
 .lightbox__close {
     position: fixed;
     top: 1.25rem;
@@ -532,4 +547,149 @@ footer a {
     color: var(--text-primary);
     text-decoration: none;
     opacity: 1;
+}
+
+/* ── Skills filters ── */
+.skills-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.skills-filter {
+    background: transparent;
+    border: 1px solid rgba(108, 99, 255, 0.25);
+    color: var(--text-muted);
+    font-family: inherit;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.3em 0.8em;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.skills-filter:hover {
+    color: var(--text-primary);
+    border-color: rgba(108, 99, 255, 0.5);
+}
+
+.skills-filter.is-active {
+    background: rgba(108, 99, 255, 0.2);
+    color: var(--accent);
+    border-color: rgba(108, 99, 255, 0.5);
+}
+
+.skills-table tr.is-hidden {
+    display: none;
+}
+
+/* ── Wettbewerbe ── */
+.section__wettbewerbe {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.section__wettbewerbe h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+}
+
+.competition-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.competition__item {
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    border: 1px solid rgba(108, 99, 255, 0.2);
+    background: var(--highlight-bg);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.competition__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.competition__category {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0.8;
+}
+
+.competition__date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+}
+
+.competition__item > h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+.competition__level {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.competition__awards {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+}
+
+.competition__awards li {
+    font-size: 0.78rem;
+    padding: 0.2em 0.7em;
+    border-radius: 4px;
+    background: rgba(34, 197, 94, 0.1);
+    color: #4ade80;
+    border: 1px solid rgba(34, 197, 94, 0.25);
+    letter-spacing: 0.03em;
+}
+
+.competition__stages {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+    padding-left: 1rem;
+    border-left: 2px solid rgba(108, 99, 255, 0.2);
+}
+
+.competition__stage {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+/* ── Competition image ── */
+.competition__img {
+    width: calc(100% + 3rem);
+    margin: 0.25rem -1.5rem;
+    height: auto;
+    object-fit: unset;
+    border-top: 1px solid rgba(108, 99, 255, 0.15);
+    border-bottom: 1px solid rgba(108, 99, 255, 0.15);
+    display: block;
 }

@@ -36,11 +36,14 @@
 (function () {
     var lightbox = document.getElementById('lightbox');
     var lightImg = document.getElementById('lightbox-img');
+    var caption  = document.getElementById('lightbox-caption');
     var closeBtn = document.getElementById('lightbox-close');
 
-    function open(src, alt) {
+    function open(src, alt, title) {
         lightImg.src = src;
         lightImg.alt = alt || '';
+        caption.textContent = title || '';
+        caption.style.display = title ? 'block' : 'none';
         lightbox.classList.add('is-open');
         document.body.style.overflow = 'hidden';
     }
@@ -55,7 +58,7 @@
     document.querySelectorAll('img[data-lightbox]').forEach(function (img) {
         img.style.cursor = 'zoom-in';
         img.addEventListener('click', function () {
-            open(img.src, img.alt);
+            open(img.src, img.alt, img.dataset.title);
         });
     });
 
@@ -69,5 +72,28 @@
     // Escape key to close
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') close();
+    });
+}());
+
+// ── Skills table filters ──
+(function () {
+    var filters = document.querySelectorAll('.skills-filter');
+    var rows    = document.querySelectorAll('.skills-table tbody tr');
+
+    filters.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var cat = btn.dataset.filter;
+
+            filters.forEach(function (b) { b.classList.remove('is-active'); });
+            btn.classList.add('is-active');
+
+            rows.forEach(function (row) {
+                if (cat === 'all' || row.dataset.category === cat) {
+                    row.classList.remove('is-hidden');
+                } else {
+                    row.classList.add('is-hidden');
+                }
+            });
+        });
     });
 }());
