@@ -1,0 +1,14 @@
+Options -Indexes
+
+RewriteEngine On
+
+# Route everything through the front controller
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L]
+
+# Custom error pages
+ErrorDocument 400 /index.php
+ErrorDocument 403 /index.php
+ErrorDocument 404 /index.php
+ErrorDocument 500 /index.php

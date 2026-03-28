@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/bootstrap.php';
+require_once dirname(__DIR__) . '/bootstrap.php';
 
 $router  = new Router();
 $request = new Request();
@@ -19,7 +19,8 @@ $router->get('/imprint', function () {
     require VIEWS . '/imprint.php';
 });
 
-$router->get('/img', function () {
+$router->get('/img', function (Request $req) {
+    // Proxy to img.php at root
     require ROOT . '/img.php';
 });
 

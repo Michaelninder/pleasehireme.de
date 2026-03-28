@@ -801,3 +801,68 @@ a:focus-visible {
         height: 130px;
     }
 }
+
+/* ── Error page ── */
+.section__error {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    gap: 0.75rem;
+}
+
+.error__code {
+    font-size: clamp(5rem, 20vw, 10rem);
+    font-weight: 700;
+    color: var(--accent);
+    opacity: 0.3;
+    line-height: 1;
+    letter-spacing: -0.04em;
+}
+
+.error__title {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    font-weight: 700;
+}
+
+.error__desc {
+    color: var(--text-muted);
+    font-size: 1rem;
+    max-width: 400px;
+    line-height: 1.7;
+}
+
+.error__back {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+}
+
+/* ── Imprint ── */
+.imprint-block {
+    margin-bottom: 2rem;
+}
+
+.imprint-block h3 {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0.8;
+    margin-bottom: 0.6rem;
+}
+
+.imprint-block p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+}
+
+.imprint-block strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}

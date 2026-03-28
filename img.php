@@ -1,4 +1,7 @@
 <?php
+// Suppress deprecation notices — they would corrupt binary image output
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
+
 /**
  * img.php — on-the-fly image processor
  *
@@ -84,7 +87,13 @@ function encode_image($img, int $type, int $quality, ?string $forceFormat): arra
 
 // ── Parse & validate params ───────────────────────────────────────────────────
 
-$docRoot  = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
+// ROOT may be defined by bootstrap.php (when called via router),
+// or we derive it ourselves (when called directly).
+if (!defined('ROOT')) {
+    define('ROOT', dirname(__DIR__));
+}
+
+$projectRoot = ROOT;
 $src      = isset($_GET['src'])    ? $_GET['src']           : '';
 $reqW     = isset($_GET['w'])      ? (int)  $_GET['w']      : 0;
 $reqH     = isset($_GET['h'])      ? (int)  $_GET['h']      : 0;
@@ -113,12 +122,12 @@ if (!in_array($format,$validFmts,  true)) $format = null;
 
 $src = ltrim($src, '/');
 $src = str_replace(['../', '..\\', "\0"], '', $src);
-$absPath = $docRoot . '/' . $src;
+$absPath = $projectRoot . '/' . $src;
 
 if (!$src || !file_exists($absPath) || !is_file($absPath)) {
     http_response_code(404); exit('Image not found.');
 }
-if (strpos(realpath($absPath), realpath($docRoot)) !== 0) {
+if (strpos(realpath($absPath), realpath($projectRoot)) !== 0) {
     http_response_code(403); exit('Forbidden.');
 }
 
@@ -157,7 +166,7 @@ if ($half !== '') {
     }
     $halved = create_canvas($hw, $hh, $hasAlpha);
     imagecopy($halved, $img, 0, 0, $hx, $hy, $hw, $hh);
-    imagedestroy($img);
+    // imagedestroy (no-op in PHP 8+)
     $img   = $halved;
     $origW = $hw;
     $origH = $hh;
@@ -167,7 +176,7 @@ if ($half !== '') {
 
 if ($reqW === 0 && $reqH === 0) {
     [$data, $mime] = encode_image($img, $type, $quality, $format);
-    imagedestroy($img);
+    // imagedestroy (no-op in PHP 8+)
     file_put_contents($cachePath, $data);
     send_image($data, $mime);
 }
@@ -192,7 +201,7 @@ $dst = create_canvas($outW, $outH, $hasAlpha);
 if ($fit === 'scale') {
     // Proportional — recalculate height from width
     $outH = (int) round($origH * ($outW / $origW));
-    imagedestroy($dst);
+    // imagedestroy (no-op in PHP 8+)
     $dst = create_canvas($outW, $outH, $hasAlpha);
     imagecopyresampled($dst, $img, 0, 0, 0, 0, $outW, $outH, $origW, $origH);
 
@@ -241,10 +250,10 @@ if ($fit === 'scale') {
     imagecopyresampled($dst, $img, $offX, $offY, 0, 0, $fitW, $fitH, $origW, $origH);
 }
 
-imagedestroy($img);
+// imagedestroy (no-op in PHP 8+)
 
 [$data, $mime] = encode_image($dst, $type, $quality, $format);
-imagedestroy($dst);
+// imagedestroy (no-op in PHP 8+)
 
 file_put_contents($cachePath, $data);
 send_image($data, $mime);
