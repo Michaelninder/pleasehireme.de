@@ -53,7 +53,7 @@
         <h2>Some of my (wayy too many) Projects</h2>
         <ul class="projects-list">
             <li class="project-card">
-                <img class="project-card__img" src="assets/img/projects/api-sandbox.png" alt="api-sandbox.de preview">
+                <img class="project-card__img" src="assets/img/projects/api-sandbox.png" alt="api-sandbox.de preview" data-lightbox>
                 <div class="project-card__header">
                     <span class="project-card__name">api-sandbox.de</span>
                 </div>
@@ -64,7 +64,7 @@
                 </div>
             </li>
             <li class="project-card">
-                <img class="project-card__img" src="assets/img/projects/httpclient.png" alt="httpclient.de preview">
+                <img class="project-card__img" src="assets/img/projects/httpclient.png" alt="httpclient.de preview" data-lightbox>
                 <div class="project-card__header">
                     <span class="project-card__name">httpclient.de</span>
                 </div>
@@ -75,7 +75,7 @@
                 </div>
             </li>
             <li class="project-card">
-                <img class="project-card__img" src="assets/img/projects/louixch.png" alt="Louixch.de preview">
+                <img class="project-card__img" src="assets/img/projects/louixch.png" alt="Louixch.de preview" data-lightbox>
                 <div class="project-card__header">
                     <span class="project-card__name">Louixch.de</span>
                 </div>
@@ -153,6 +153,11 @@
             <!-- locale-switcher (coming soon) -->
         </div>
     </footer>
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+        <button class="lightbox__close" id="lightbox-close" aria-label="Close">&times;</button>
+        <img class="lightbox__img" id="lightbox-img" src="" alt="">
+    </div>
+
     <script src="assets/js/app.js"></script>
 </body>
 </html>

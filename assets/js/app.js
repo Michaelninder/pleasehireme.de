@@ -31,3 +31,43 @@
         ctx.fillText(addr, 2, 11);
     });
 }());
+
+// ── Lightbox ──
+(function () {
+    var lightbox = document.getElementById('lightbox');
+    var lightImg = document.getElementById('lightbox-img');
+    var closeBtn = document.getElementById('lightbox-close');
+
+    function open(src, alt) {
+        lightImg.src = src;
+        lightImg.alt = alt || '';
+        lightbox.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+        lightbox.classList.remove('is-open');
+        document.body.style.overflow = '';
+        lightImg.src = '';
+    }
+
+    // Any img with data-lightbox attribute triggers the gallery
+    document.querySelectorAll('img[data-lightbox]').forEach(function (img) {
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', function () {
+            open(img.src, img.alt);
+        });
+    });
+
+    closeBtn.addEventListener('click', close);
+
+    // Click backdrop to close
+    lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox) close();
+    });
+
+    // Escape key to close
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') close();
+    });
+}());
