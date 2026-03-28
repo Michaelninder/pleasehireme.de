@@ -1,6 +1,17 @@
 <?php
 require_once dirname(__DIR__) . '/bootstrap.php';
 
+// ── Locale ────────────────────────────────────────────────────────────────────
+if (isset($_GET['lang'])) {
+    $locale = $_GET['lang'];
+    setcookie('lang', $locale, time() + 31536000, '/');
+} elseif (isset($_COOKIE['lang'])) {
+    $locale = $_COOKIE['lang'];
+} else {
+    $locale = Lang::detectLocale();
+}
+Lang::init($locale);
+
 $router  = new Router();
 $request = new Request();
 
@@ -19,8 +30,7 @@ $router->get('/imprint', function () {
     require VIEWS . '/imprint.php';
 });
 
-$router->get('/img', function (Request $req) {
-    // Proxy to img.php at root
+$router->get('/img', function () {
     require ROOT . '/img.php';
 });
 

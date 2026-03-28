@@ -1,24 +1,22 @@
-<?php
-// $stack, $projects, $skills, $competitions must be in scope (passed from router)
-?>
+<?php $isDE = Lang::locale() === 'de'; ?>
 
 <!-- ── Hero ── -->
 <section class="section__hero" id="hero">
-    <h1>Please hire <span class="highlight">ME</span>!</h1>
-    <h5 class="domain-subtitle">pleasehireme.de</h5>
+    <h1><?= Lang::get('hero.title') ?></h1>
+    <h5 class="domain-subtitle"><?= Lang::get('hero.subtitle') ?></h5>
 </section>
 
 <!-- ── About ── -->
 <section class="section__about" id="about">
-    <span class="section-indicator">#about</span>
-    <h2>About ME</h2>
-    <p>I am <span class="highligh">Fabian Ternis</span>, a <span class="highligh">German</span> Developer, mainly focused on <span class="highlight">Back-End</span> ...</p>
+    <span class="section-indicator"><?= Lang::get('about.indicator') ?></span>
+    <h2><?= Lang::get('about.heading') ?></h2>
+    <p><?= Lang::get('about.body') ?></p>
 </section>
 
 <!-- ── Stack ── -->
 <section class="section__stack" id="stack">
-    <span class="section-indicator">#stack</span>
-    <h2>My Tech Stack</h2>
+    <span class="section-indicator"><?= Lang::get('stack.indicator') ?></span>
+    <h2><?= Lang::get('stack.heading') ?></h2>
     <ul>
         <?php foreach ($stack as $item): ?>
             <li><?= htmlspecialchars($item) ?></li>
@@ -29,8 +27,8 @@
 
 <!-- ── Projects ── -->
 <section class="section__projects" id="projects">
-    <span class="section-indicator">#projects</span>
-    <h2>Some of my (wayy too many) Projects</h2>
+    <span class="section-indicator"><?= Lang::get('projects.indicator') ?></span>
+    <h2><?= Lang::get('projects.heading') ?></h2>
     <ul class="projects-list">
         <?php foreach ($projects as $project): ?>
         <li class="project-card">
@@ -54,16 +52,16 @@
             </div>
         </li>
         <?php endforeach; ?>
-        <li class="project-card project-card--more"><span>and many more ...</span></li>
+        <li class="project-card project-card--more"><span><?= Lang::get('projects.more') ?></span></li>
     </ul>
 </section>
 
 <!-- ── Skills ── -->
 <section class="section__skills" id="skills">
-    <span class="section-indicator">#skills</span>
-    <h2>Skills &amp; Proficiency</h2>
+    <span class="section-indicator"><?= Lang::get('skills.indicator') ?></span>
+    <h2><?= Lang::get('skills.heading') ?></h2>
     <div class="skills-filters">
-        <button class="skills-filter is-active" data-filter="all">All</button>
+        <button class="skills-filter is-active" data-filter="all"><?= Lang::get('skills.filter.all') ?></button>
         <?php foreach (array_unique(array_column($skills, 'category')) as $cat): ?>
             <button class="skills-filter" data-filter="<?= htmlspecialchars($cat) ?>">
                 <?= htmlspecialchars($cat) ?>
@@ -72,7 +70,11 @@
     </div>
     <table class="skills-table">
         <thead>
-            <tr><th>Skill</th><th>Category</th><th>Level</th></tr>
+            <tr>
+                <th><?= Lang::get('skills.col.skill') ?></th>
+                <th><?= Lang::get('skills.col.cat') ?></th>
+                <th><?= Lang::get('skills.col.level') ?></th>
+            </tr>
         </thead>
         <tbody>
             <?php foreach ($skills as $skill): ?>
@@ -88,10 +90,11 @@
     </table>
 </section>
 
-<!-- ── Wettbewerbe ── -->
+<!-- ── Wettbewerbe (DE only) ── -->
+<?php if ($isDE): ?>
 <section class="section__wettbewerbe" id="wettbewerbe">
-    <span class="section-indicator">#wettbewerbe</span>
-    <h2>Wettbewerbe</h2>
+    <span class="section-indicator"><?= Lang::get('wettbewerbe.indicator') ?></span>
+    <h2><?= Lang::get('wettbewerbe.heading') ?></h2>
     <div class="competition-list">
         <?php foreach ($competitions as $comp): ?>
         <div class="competition__item">
@@ -151,25 +154,26 @@
         <?php endforeach; ?>
     </div>
 </section>
+<?php endif; ?>
 
 <!-- ── Availability ── -->
 <section class="section__availability" id="availability">
-    <span class="section-indicator">#availability</span>
-    <h2>Availability</h2>
-    <p>I am currently <span class="highlight">open to new opportunities</span>. Feel free to reach out if you think I'd be a good fit for your team.</p>
+    <span class="section-indicator"><?= Lang::get('availability.indicator') ?></span>
+    <h2><?= Lang::get('availability.heading') ?></h2>
+    <p><?= Lang::get('availability.body') ?></p>
 </section>
 
 <!-- ── Contact ── -->
 <section class="section__contact" id="contact">
-    <span class="section-indicator">#contact</span>
-    <h2>Contact</h2>
+    <span class="section-indicator"><?= Lang::get('contact.indicator') ?></span>
+    <h2><?= Lang::get('contact.heading') ?></h2>
     <ul class="contact-list">
         <li>
-            <span class="contact-label">Email</span>
+            <span class="contact-label"><?= Lang::get('contact.email') ?></span>
             <canvas class="email-canvas" id="email-1" aria-label="hey [at] fabianternis.de"></canvas>
         </li>
         <li>
-            <span class="contact-label">Email (work)</span>
+            <span class="contact-label"><?= Lang::get('contact.email_work') ?></span>
             <canvas class="email-canvas" id="email-2" aria-label="f.ternix [at] xpsystems.eu"></canvas>
         </li>
         <li>
