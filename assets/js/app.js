@@ -77,6 +77,48 @@
     });
 }());
 
+// ── Navbar: scroll state + mobile toggle ──
+(function () {
+    var navbar  = document.getElementById('navbar');
+    var toggle  = document.getElementById('nav-toggle');
+    var menu    = document.getElementById('nav-menu');
+    var links   = menu ? menu.querySelectorAll('.nav-link__link') : [];
+
+    function onScroll() {
+        navbar.classList.toggle('is-scrolled', window.scrollY > 50);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    function openMenu() {
+        menu.classList.add('is-open');
+        toggle.classList.add('is-open');
+        toggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+        menu.classList.remove('is-open');
+        toggle.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+    }
+
+    function toggleMenu() {
+        menu.classList.contains('is-open') ? closeMenu() : openMenu();
+    }
+
+    if (toggle) toggle.addEventListener('click', toggleMenu);
+
+    links.forEach(function (link) {
+        link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeMenu();
+    });
+}());
+
 // ── Skills table filters ──
 (function () {
     var filters = document.querySelectorAll('.skills-filter');

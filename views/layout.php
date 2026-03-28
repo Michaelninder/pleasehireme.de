@@ -13,16 +13,19 @@ $content = $content ?? '';
 </head>
 <body>
 
-<nav class="navbar">
+<nav class="navbar" id="navbar">
     <div class="nav-logo">pleasehireme</div>
-    <div class="nav-links__container">
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links__container" id="nav-menu">
         <ul class="nav-links__list">
-            <li class="nav-link__item"><a href="#about"        class="nav-link__link">About</a></li>
-            <li class="nav-link__item"><a href="#projects"     class="nav-link__link">Projects</a></li>
-            <li class="nav-link__item"><a href="#skills"       class="nav-link__link">Skills</a></li>
-            <li class="nav-link__item"><a href="#wettbewerbe"  class="nav-link__link">Wettbewerbe</a></li>
-            <li class="nav-link__item"><a href="#availability" class="nav-link__link">Availability</a></li>
-            <li class="nav-link__item"><a href="#contact"      class="nav-link__link">Contact</a></li>
+            <li class="nav-link__item"><a href="/#about"        class="nav-link__link">About</a></li>
+            <li class="nav-link__item"><a href="/#projects"     class="nav-link__link">Projects</a></li>
+            <li class="nav-link__item"><a href="/#skills"       class="nav-link__link">Skills</a></li>
+            <li class="nav-link__item"><a href="/#wettbewerbe"  class="nav-link__link">Wettbewerbe</a></li>
+            <li class="nav-link__item"><a href="/#availability" class="nav-link__link">Availability</a></li>
+            <li class="nav-link__item"><a href="/#contact"      class="nav-link__link">Contact</a></li>
         </ul>
     </div>
 </nav>
