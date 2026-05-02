@@ -178,7 +178,7 @@
         </li>
         <li>
             <span class="contact-label">GitHub</span>
-            <a class="contact-link" href="https://github.com/michaelninder" target="_blank" rel="noopener noreferrer">github.com/michaelninder</a>
+            <a class="contact-link" href="https://github.com/fabianternis" target="_blank" rel="noopener noreferrer">github.com/fabianternis</a>
         </li>
         <li>
             <span class="contact-label">Instagram</span>
