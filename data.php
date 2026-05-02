@@ -32,7 +32,7 @@ $projects = [
         'img'   => 'assets/img/projects/louixch.png',
         'links' => [
             ['label' => 'Live',   'url' => 'https://louixch.de'],
-            ['label' => 'GitHub', 'url' => 'https://github.com/michaelninder/louixch.de'],
+            ['label' => 'GitHub', 'url' => 'https://github.com/fabianternis/louixch.de'],
         ],
     ],
 ];
